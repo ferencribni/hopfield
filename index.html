@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diploma Thesis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="hero">
+        <div class="hero-overlay">
+            <nav></nav>
+            <div class="hero-text">
+                <h2>Üdvözöllek a Hopfield hálózatok világában</h2>
+                <p>Átfogó útmutató a neurális hálózatokról és a Hopfield-hálózatokról.</p>
+                <a href="#menu" class="cta">Kezdjünk hozzá</a>
+                <a href="C:\Users\ribni\Desktop\Weblap\app.zip" download class="cta">Applikáció/programkód letöltése</a>
+            </div>
+        </div>
+    </header>
+    <section id="menu">
+        <ul class="menu">
+            <li>
+                <a href="C:\Users\ribni\Desktop\Weblap\Feri-diplomamunka_info.pdf" download>
+                    <img src="chapter1.jpg" alt="Download PDF">
+                    <span>Diplomamunka letöltése PDF formátumban</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <a href="#top" id="back-to-top">Vissza a tetejére</a>
+    <footer>
+        <p>&copy; 2024 František Ribní | Minden jog fenntartva.</p>
+        <p>Email: 128209@student.ujs.sk</p>
+        <p>Szekunder Email: ribniferenc780@gmail.com</p>
+    </footer>
+    <script>
+        window.addEventListener('scroll', function() {
+            const backToTopBtn = document.getElementById('back-to-top');
+
+            if (window.pageYOffset > 100) {
+                backToTopBtn.style.display = 'block';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+
+        document.querySelector('#back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // képek forgása bemenetek
+        const heroImages = [
+            'hero.jpg',
+            'hero1.jpg',
+            'hero2.jpg'
+            
+        ];
+
+        // képek váltakozása
+        setInterval(function() {
+            const hero = document.querySelector('.hero');
+            let imageIndex = Number(hero.getAttribute('data-image-index'));
+
+            imageIndex = (imageIndex + 1) % heroImages.length; // következő kép
+
+            hero.style.backgroundImage = `url('${heroImages[imageIndex]}')`;
+            hero.setAttribute('data-image-index', imageIndex);
+        }, 5000); // 5 másodpercenkénti váltás
+
+         // jelszó és kód , 5 percenként kéri, illetve első belépéskor
+       
+        window.onload = function() {
+            const storedTime = localStorage.getItem('accessTime');
+            const currentTime = new Date().getTime();
+            const timeDifference = currentTime - storedTime;
+            const thirtyMinutes = 5 * 60 * 1000; // milisecundumokban
+
+            if (!storedTime || timeDifference > thirtyMinutes) {
+                const username = prompt("Kérlek add meg a felhasználóneved:");
+                const password = prompt("Kérlek add meg a jelszavad:");
+
+                if (username !== "sysadmin" || password !== "hopfield") {
+                    document.body.innerHTML = '<div class="access-denied"><h1>Belépés megtagadva!</h1></div>';
+                } else {
+                    localStorage.setItem('accessTime', currentTime);
+                }
+            }
+        };
+
+
+    </script>
+</body>
+
+</html>
